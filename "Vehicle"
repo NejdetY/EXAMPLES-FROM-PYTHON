@@ -1,0 +1,50 @@
+Question4: Create a "Vehicle" class in Python. Make sure this class has the following properties:
+
+Features:
+"make" (Brand of vehicle)
+"model" (Vehicle model)
+"year" (Year of manufacture of the vehicle)
+Create a "Vehicle" class and create two derived subclasses, "Off-Road Vehicle" (SUV) and "SportsCar" classes.
+
+The "Off-Road Vehicle" class inherits from the "Vehicle" class and adds an additional "four_wheel drive" feature.
+Let the "SportCar" class inherit from the "Vehicle" class and add a "max_speed" property.
+Create an instance of each class, determine its properties, and write a program to display these properties.
+
+
+class Vehicle:
+    def __init__(self, make,model, year):
+        self.make=make
+        self.model=model
+        self.year=year
+
+    def display_info(self):
+        return f"Make: {self.make}, Model:{self.model}, Year:{self.year}"
+
+
+class OffRoad(Vehicle):
+    def __init__(self, make, model,year, four_wheel_drive):
+        super().__init__(make, model,year)
+        self.four_wheel_drive=four_wheel_drive
+
+    def display_info(self):
+        base_info=super().display_info()
+        return f"{base_info}, Four-Wheel Drive:{'Yes' if self.four_wheel_drive else 'No'}"
+
+class SportsCar(Vehicle):
+    def __init__(self,make, model, year, max_speed):
+        super().__init__(make, model, year)
+        self.max_speed=max_speed
+
+    def display_info(self):
+        base_info=super().display_info()
+        return f"{base_info}, Max Speed:{self.max_speed} km/h"
+off_road_vehicle=OffRoad(make="Jeep", model="Wrangler", year=2002, four_wheel_drive=True)
+
+sports_car=SportsCar(make="Honda", model="civic", year=2004, max_speed=120)
+
+print("Off-Road Vehichle information:")
+print(off_road_vehicle.display_info())
+
+print("\nSports Car Information:")
+print(sports_car.display_info())
+
