@@ -1,0 +1,71 @@
+Question5: Create a "Customer" class and an "Account" class. Let the "Account" class inherit from the "Customer" class and represent a customer's bank account information.
+
+Customer Class Features:
+"name" (customer name)
+"surname" (customer surname)
+"tc_identification" (customer TR ID number)
+"phone" (customer phone number)
+Account Class Properties:
+"customer" (a Customer object)
+"account_number" (account number)
+"balance" (account balance)
+Customer Class Method:
+"display_information()": Displays the customer's name, surname, TR ID number and telephone number.
+Account Class Methods:
+"deposit(self, amount)": A method that deposits a certain amount of money into the account.
+"money_check(self, amount)": A method that withdraws a certain amount of money from the account. However, if there is not enough balance in the account, the transaction should not occur and a message should be displayed.
+"display_balance()": A method that displays the account balance.
+Create these two classes, then create a Customer object and an Account object, add the customer information to the Account object, and perform account operations and view the results.
+
+class Customer:
+    def __init__(self, name, surname, ID_number, phone_number):
+        self.name=name
+        self.surname=surname
+        self.ID_number=ID_number
+        self.phone_number=phone_number
+
+    def display_info(self):
+        return (f"Customer Information:\n"
+        f"Name:{self.name}\n"
+        f"Surname:{self.surname}\n"
+        f"ID Number:{self.ID_number}\n"
+        f"Phone:{self.phone_number}")
+
+
+class Account(Customer):
+    def __init__(self, customer, account_number, balance=0 ):
+        super().__init__(customer.name, customer.surname, customer.ID_number, customer.phone_number)
+        self.account_number=account_number
+        self.balance=balance
+
+    def deposit(self, amount):
+        if amount>0:
+            self.balance+=amount
+            print(f"Deposited £{amount}. New Balance:£{self.balance}.")
+        else:
+            print("Invalid amount. Please enter a positive value.")
+
+    def money_check(self, amount):
+        if 0<amount<=self.balance:
+            self.balance-=amount
+            print(f"Withdrew £{amount}. Remaining Balance:£{self.balance}.")
+        elif amount>self.balance:
+            print("Insufficient fund. Transaction cannot be completed.")
+        else:
+            print("Invalid amount. Please enter a positive value.")
+
+    def display_balance(self):
+        print(f"Acount Baalance:£{self.balance}")
+
+customer1=Customer("Yusuf", "Yilmaz", "10987654321", "0612936525")
+
+acount1=Account(customer1, account_number=1001, balance=1000)
+
+print(acount1.display_info())
+
+acount1.deposit(2000)
+acount1.money_check(1000)
+acount1.money_check(3000)
+
+acount1.display_balance()
+
